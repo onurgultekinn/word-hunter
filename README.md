@@ -2,7 +2,7 @@
 
 A lightweight Chrome Extension designed to streamline language learning by capturing, translating, and archiving vocabulary directly from the browser's context menu.
 
-This extension can be used only Turkish but I can add another languages in next versions.
+Currently, this extension only supports English-to-Turkish translation, with plans to add multi-language support in future releases.
 
 ### Key Features & Technical Implementation
 - **Asynchronous API Integration:** Utilizes Google Translate's API endpoints asynchronously to fetch word definitions and automatically retrieve contextual example sentences.
