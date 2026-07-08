@@ -1,0 +1,179 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  width: 360px; /* Genişliği biraz artırdık butonlar sığsın diye */
+  padding: 10px;
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+/* Header Düzeni */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+h1 { font-size: 16px; margin: 0; color: #333; }
+
+.header-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+/* Üst Buton Stilleri */
+.action-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.export-btn {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+.export-btn:hover {
+  background-color: #c8e6c9;
+}
+
+.clear-btn {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.clear-btn:hover {
+  background-color: #ffcdd2;
+}
+
+/* Arama Kutusu */
+#searchBox {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+li {
+  background: #fff;
+  border: 1px solid #eee;
+  margin-bottom: 8px;
+  padding: 12px 12px 35px 12px; /* Alt boşluk (Silme butonu için) */
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.word-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.word-text { font-weight: 600; color: #222; cursor: pointer; font-size: 15px; }
+.word-translation { color: #1976d2; cursor: pointer; font-size: 14px; }
+
+/* Kopyalama Butonu Genel */
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.4;
+  padding: 2px;
+  margin-left: 5px;
+  flex-shrink: 0; /* Butonun sıkışmasını engeller */
+}
+.copy-btn:hover { opacity: 1; }
+
+/* --- Örnek Cümle Kutusu --- */
+.example-box {
+  margin-top: 8px;
+  background: #f0f7ff;
+  border-left: 3px solid #1976d2;
+  padding: 6px 8px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Örnek Cümle Satırları (Metin + Buton) */
+.example-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Metin uzunsa buton yukarıda kalsın */
+  width: 100%;
+}
+
+.tr-line {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dotted #cce5ff;
+}
+
+.word-example { 
+  font-style: italic; 
+  color: #444; 
+  font-size: 13px; 
+  cursor: pointer; 
+  line-height: 1.4;
+  flex-grow: 1; /* Metin alanı kaplasın */
+}
+
+.word-example-tr { 
+  color: #666; 
+  font-size: 12px; 
+  cursor: pointer; 
+  line-height: 1.3;
+  flex-grow: 1; 
+}
+
+.word-example.placeholder { color: #999; font-style: normal; }
+
+/* Meta Bilgi */
+.word-meta {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 10px;
+  color: #999;
+}
+
+/* Silme Butonu (Güvenli Bölge) */
+.delete-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #fff0f0;
+  border: 1px solid #ffcdd2;
+  color: #d32f2f;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #ffebee;
+  border-color: #e57373;
+}
+
+.empty-message { padding: 15px; text-align: center; color: #777; }
+.edit-input { width: 100%; border: none; border-bottom: 1px dashed #1976d2; background: transparent; outline: none; font-size: inherit; margin-bottom: 2px; }

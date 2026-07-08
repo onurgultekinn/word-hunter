@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kaydedilen Kelimeler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Kelime Listem</h1>
+    <div class="header-buttons">
+      <button id="exportBtn" title="Excel/CSV Olarak İndir" class="action-btn export-btn">📥 CSV</button>
+      <button id="clearButton" title="Listeyi Temizle" class="action-btn clear-btn">Temizle</button>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Kelime, çeviri veya örnek ara..." autocomplete="off">
+  </div>
+
+  <ul id="wordList">
+    </ul>
+  <script src="popup.js"></script>
+</body>
+</html>
