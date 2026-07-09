@@ -102,14 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return btn;
   }
 
-  // --- 2. CSV İndirme Fonksiyonu (DÜZELTİLDİ) ---
+  // --- 2. CSV İndirme Fonksiyonu ---
   function exportToCSV() {
     if (allSavedWords.length === 0) {
       alert("Dışa aktarılacak kelime yok.");
       return;
     }
 
-    // 1. Sıralama (Kaynağa göre grupla)
     const sortedWords = [...allSavedWords].sort((a, b) => {
       const sourceA = (a.source || "").toLowerCase();
       const sourceB = (b.source || "").toLowerCase();
@@ -118,26 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
       return 0;
     });
 
-    // 2. BOM (Byte Order Mark) - Türkçe karakterler için UTF-8 imzası
     let csvContent = "\uFEFF"; 
-    
-    // DİKKAT: Başlık satırı eklemiyoruz çünkü uygulama direkt veri bekliyor olabilir.
 
     sortedWords.forEach(word => {
-      // İçerikteki çift tırnakları escape eder ve metni tırnak içine alır
       const escapeCsv = (text) => {
-        if (!text) return '""'; // Boşsa boş tırnak döndür
+        if (!text) return '""';
         return `"${text.replace(/"/g, '""')}"`; 
       };
 
       const row = [
-        escapeCsv(word.text),        // 1. Sütun: Kelime
-        escapeCsv(word.translation), // 2. Sütun: Çeviri
-        escapeCsv(word.example),     // 3. Sütun: Örnek (EN)
-        escapeCsv(word.example_tr)   // 4. Sütun: Örnek (TR)
+        escapeCsv(word.text),
+        escapeCsv(word.translation),
+        escapeCsv(word.example),
+        escapeCsv(word.example_tr)
       ];
       
-      // ÖNEMLİ DEĞİŞİKLİK: Virgül yerine noktalı virgül (;) ile birleştiriyoruz.
       csvContent += row.join(";") + "\n";
     });
 
@@ -170,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadWords() {
     chrome.storage.local.get({ savedWords: [] }, (result) => {
+      // Hafızadaki düz sırayı popup gösterimi için ters çeviriyoruz
       allSavedWords = result.savedWords.slice().reverse();
       runSearch(searchBox.value);
     });
@@ -197,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (el.closest('.delete-btn')) {
       chrome.storage.local.get({savedWords:[]}, res => {
+        // Silme işleminde id eşleşmesine göre filtrele ve düz sırada kaydet
         const newWords = res.savedWords.filter(w => w.id !== id);
         chrome.storage.local.set({savedWords: newWords}, () => {
           allSavedWords = allSavedWords.filter(w => w.id !== id);
@@ -206,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (el.classList.contains('copy-btn')) {
       const parent = el.parentElement;
-      const span = parent.querySelector('span'); 
+      // Nokta atışı class'lar aranarak kopyalama doğruluğu sağlandı
+      const span = parent.querySelector('.word-text, .word-translation, .word-example, .word-example-tr'); 
       if (span) {
         navigator.clipboard.writeText(span.textContent).then(() => {
           const old = el.innerHTML;
@@ -237,7 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = allSavedWords.findIndex(w => w.id === id);
         if(idx > -1) {
           allSavedWords[idx][field] = val;
-          chrome.storage.local.set({savedWords: allSavedWords.slice().reverse()}, () => {
+          // Hafızadaki güncel listeyi (allSavedWords) tekrar tersine çevirerek (reverse) orijinal sıralamasında storage'a yazıyoruz
+          const originalOrderWords = allSavedWords.slice().reverse();
+          chrome.storage.local.set({savedWords: originalOrderWords}, () => {
             runSearch(searchBox.value);
           });
         }
