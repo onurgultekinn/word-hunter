@@ -25,6 +25,8 @@ Currently, this extension only supports English-to-Turkish translation, with pla
 - **Search & Filter:** Use the top search bar to dynamically filter through your saved words, translations, or example sentences.
 - **Inline Editing:** Click directly on any word, translation, or example text inside the popup to edit it inline. Press `Enter` or click outside to save changes.
 - **Export Data:** Click the **"📥 CSV"** button to download your structuralized word archive with proper UTF-8 character encoding.
+<img width="477" height="367" alt="image" src="https://github.com/user-attachments/assets/b99b61c8-cace-44ba-9946-cad2f7d991c9" />
+
 
 ### Tech Stack
 - **Core:** JavaScript (ES6+, Chrome Extensions API Architecture - Manifest V3)
